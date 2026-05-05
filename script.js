@@ -51,8 +51,8 @@ const playMusic = (track, pause = false)=>{
 }
 
 async function main(){
-    songs = await getSongs("songs");
-    // console.log(songs);
+    songs = await getSongs("Songs");
+    console.log(songs);
     playMusic(songs[0], true)
 
     let songUL = document.querySelector(".songList").getElementsByTagName("ul")[0]
