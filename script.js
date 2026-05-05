@@ -19,7 +19,7 @@ function formatTime(seconds) {
 let currentSong = new Audio();
 async function getSongs(folder){
     currFolder = folder;
-    let a = await fetch(`https://armanbin007.github.io/Spotify-Replica-Project/${currFolder}`)
+    let a = await fetch(`https://github.com/armanbin007/Spotify-Replica-Project/tree/main/${currFolder}`)
     let response = await a.text();
     // console.log(response)
     let div = document.createElement("div")
