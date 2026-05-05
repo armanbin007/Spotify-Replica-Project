@@ -17,26 +17,57 @@ function formatTime(seconds) {
 }
 
 let currentSong = new Audio();
-async function getSongs(folder){
+// async function getSongs(folder){
+//     currFolder = folder;
+//     let a = await fetch(`https://github.com/armanbin007/Spotify-Replica-Project/tree/main/${currFolder}`)
+//     let response = await a.text();
+//     // console.log(response)
+//     let div = document.createElement("div")
+//     div.innerHTML = response;
+//     let as = div.getElementsByTagName("a")
+//     let songs = []
+//     for (let i = 0; i < as.length; i++) {
+//         const element = as[i];
+//         if(element.href.endsWith(".mp3")){
+//             songs.push(element.href.split("songs")[1]);
+//         }
+//     } return songs;
+// }
+
+async function getSongs(folder) {
     currFolder = folder;
-    let a = await fetch(`https://github.com/armanbin007/Spotify-Replica-Project/tree/main/${currFolder}`)
-    let response = await a.text();
-    // console.log(response)
-    let div = document.createElement("div")
-    div.innerHTML = response;
-    let as = div.getElementsByTagName("a")
-    let songs = []
-    for (let i = 0; i < as.length; i++) {
-        const element = as[i];
-        if(element.href.endsWith(".mp3")){
-            songs.push(element.href.split("songs")[1]);
+    
+    // 1. Point to the official GitHub API for your specific repository
+    // Change 'armanbin007' and 'Spotify-Replica-Project' if your repo name is different!
+    const repoOwner = 'armanbin007';
+    const repoName = 'Spotify-Replica-Project';
+    
+    // Assuming your folders (Pak, Ind) are inside a main 'Songs' folder in your repo
+    const apiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${currFolder}`;
+
+    try {
+        let a = await fetch(apiUrl);
+        let data = await a.json();
+        
+        let songs = [];
+        // 2. The API returns an array of file objects. We loop through them.
+        for (let i = 0; i < data.length; i++) {
+            if (data[i].name.endsWith(".mp3")) {
+                // 3. Just push the exact file name
+                songs.push(data[i].name);
+            }
         }
-    } return songs;
+        return songs;
+    } catch (error) {
+        console.error("Error fetching songs from GitHub API:", error);
+        return [];
+    }
 }
 
 
 const playMusic = (track, pause = false)=>{
-    currentSong.src = `/${currFolder}/` + track
+    // currentSong.src = `/${currFolder}/` + track
+    currentSong.src = `./${currFolder}/${track}`;
     if(!pause){
         currentSong.play()
         play.src = "pause.svg"
