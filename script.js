@@ -125,7 +125,8 @@ async function main(){
     })
     prev.addEventListener("click", ()=>{
         // console.log('Prev Clicked');
-        let index = songs.indexOf(currentSong.src.split("/").slice(-1) [0])
+        // let index = songs.indexOf(currentSong.src.split("/").slice(-1) [0])
+        let index = songs.indexOf(decodeURIComponent(currentSong.src.split("/").slice(-1)[0]))
         console.log(songs, index);
         if((index - 1) >= 0){
             playMusic(songs[index-1])
@@ -134,7 +135,8 @@ async function main(){
     })
     next.addEventListener("click", ()=>{
         // console.log('Next Clicked');
-        let index = songs.indexOf(currentSong.src.split("/").slice(-1) [0])
+        // let index = songs.indexOf(currentSong.src.split("/").slice(-1) [0])
+        let index = songs.indexOf(decodeURIComponent(currentSong.src.split("/").slice(-1)[0]))
         console.log(songs, index);
         if((index + 1) < songs.length){
             playMusic(songs[index+1])
