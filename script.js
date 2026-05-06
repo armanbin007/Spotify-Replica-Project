@@ -47,8 +47,6 @@ async function getSongs(folder) {
     try {
         let a = await fetch(apiUrl);
         let data = await a.json();
-        let response = await a.text();
-        console.log(response)
         let songs = [];
         // 2. The API returns an array of file objects. We loop through them.
         for (let i = 0; i < data.length; i++) {
@@ -108,7 +106,7 @@ async function main(){
     // Attach an event listener to each song
     Array.from(document.querySelector(".songList").getElementsByTagName("li")).forEach(e=>{
     e.addEventListener("click", element=>{
-        console.log(e.querySelector(".info").firstElementChild.innerHTML);
+        // console.log(e.querySelector(".info").firstElementChild.innerHTML);
         playMusic(e.querySelector(".info").firstElementChild.innerHTML.trim())
         })
     })
