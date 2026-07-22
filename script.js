@@ -71,7 +71,7 @@ async function getSongs(folder) {
     const apiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${currFolder}`;
 
     // PASTE YOUR TOKEN HERE
-    const GITHUB_TOKEN = 'github_pat_YOUR_TOKEN_HERE'; 
+    const GITHUB_TOKEN = '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'; 
 
     try {
         // 2. Add the headers to authenticate the request and bypass the 60-request limit
