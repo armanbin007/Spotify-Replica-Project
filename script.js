@@ -33,67 +33,25 @@ let currentSong = new Audio();
 //     } return songs;
 // }
 
-// async function getSongs(folder) {
-//     currFolder = folder;
-    
-//     // 1. Point to the official GitHub API for your specific repository
-//     // Change 'armanbin007' and 'Spotify-Replica-Project' if your repo name is different!
-//     const repoOwner = 'armanbin007';
-//     const repoName = 'Spotify-Replica-Project';
-    
-//     // Assuming your folders (Pak, Ind) are inside a main 'Songs' folder in your repo
-//     const apiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${currFolder}`;
-
-//     try {
-//         let a = await fetch(apiUrl);
-//         let data = await a.json();
-//         let songs = [];
-//         // 2. The API returns an array of file objects. We loop through them.
-//         for (let i = 0; i < data.length; i++) {
-//             if (data[i].name.endsWith(".mp3")) {
-//                 // 3. Just push the exact file name
-//                 songs.push(data[i].name);
-//             }
-//         }
-//         return songs;
-//     } catch (error) {
-//         console.error("Error fetching songs from GitHub API:", error);
-//         return [];
-//     }
-// }
-
 async function getSongs(folder) {
     currFolder = folder;
     
     // 1. Point to the official GitHub API for your specific repository
+    // Change 'armanbin007' and 'Spotify-Replica-Project' if your repo name is different!
     const repoOwner = 'armanbin007';
     const repoName = 'Spotify-Replica-Project';
+    
+    // Assuming your folders (Pak, Ind) are inside a main 'Songs' folder in your repo
     const apiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${currFolder}`;
 
-    // PASTE YOUR TOKEN HERE
-    const GITHUB_TOKEN = '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'; 
-
     try {
-        // 2. Add the headers to authenticate the request and bypass the 60-request limit
-        let a = await fetch(apiUrl, {
-            headers: {
-                'User-Agent': repoOwner,
-                'Authorization': `Bearer ${GITHUB_TOKEN}`
-            }
-        });
-        
-        // Catch any remaining errors (like an expired token) before trying to read the JSON
-        if (!a.ok) {
-            throw new Error(`GitHub API error: ${a.status} ${a.statusText}`);
-        }
-
+        let a = await fetch(apiUrl);
         let data = await a.json();
         let songs = [];
-        
-        // 3. The API returns an array of file objects. We loop through them.
+        // 2. The API returns an array of file objects. We loop through them.
         for (let i = 0; i < data.length; i++) {
             if (data[i].name.endsWith(".mp3")) {
-                // Just push the exact file name
+                // 3. Just push the exact file name
                 songs.push(data[i].name);
             }
         }
@@ -103,6 +61,48 @@ async function getSongs(folder) {
         return [];
     }
 }
+
+// async function getSongs(folder) {
+//     currFolder = folder;
+    
+//     // 1. Point to the official GitHub API for your specific repository
+//     const repoOwner = 'armanbin007';
+//     const repoName = 'Spotify-Replica-Project';
+//     const apiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${currFolder}`;
+
+//     // PASTE YOUR TOKEN HERE
+//     const GITHUB_TOKEN = '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'; 
+
+//     try {
+//         // 2. Add the headers to authenticate the request and bypass the 60-request limit
+//         let a = await fetch(apiUrl, {
+//             headers: {
+//                 'User-Agent': repoOwner,
+//                 'Authorization': `Bearer ${GITHUB_TOKEN}`
+//             }
+//         });
+        
+//         // Catch any remaining errors (like an expired token) before trying to read the JSON
+//         if (!a.ok) {
+//             throw new Error(`GitHub API error: ${a.status} ${a.statusText}`);
+//         }
+
+//         let data = await a.json();
+//         let songs = [];
+        
+//         // 3. The API returns an array of file objects. We loop through them.
+//         for (let i = 0; i < data.length; i++) {
+//             if (data[i].name.endsWith(".mp3")) {
+//                 // Just push the exact file name
+//                 songs.push(data[i].name);
+//             }
+//         }
+//         return songs;
+//     } catch (error) {
+//         console.error("Error fetching songs from GitHub API:", error);
+//         return [];
+//     }
+// }
 
 
 const playMusic = (track, pause = false)=>{
